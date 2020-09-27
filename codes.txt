@@ -1,0 +1,776 @@
+
+****_________________________________________________________________________________________________________________________________________________****
+
+		OOP CONCEPTS WITH PHP - INHERITENCE		
+
+<?php
+class Animal
+{
+	public $family;
+	public $food;
+
+	function __construct($family, $food){
+		$this ->family = $family; 
+		$this ->food = $food;
+
+	}
+
+	public function decl()
+	{
+		$dec = "The Animal is {$this->family} and the Food is {$this->food}.";
+		echo $dec;
+	}
+}
+
+class Cat extends Animal
+{
+	public function message(){
+			echo '';
+
+	}
+}
+
+$cat = new Cat('Cat', 'Fish');
+$cat->message();
+$cat->decl();
+
+?>
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+
+
+		OOP CONCEPTS WITH PHP - POLYMORPHISM
+
+<?php
+
+	interface Shape{
+		public function get_Area();
+	}
+
+	class Squre implements Shape{
+		private $width;
+
+		public function __construct($width){
+			$this->width = $width;
+		}
+
+		public function get_Area(){
+			return $this->width * $this->width;
+		}
+	}
+
+	class Circle implements Shape{
+		private $r;
+
+		public function __construct($r){
+			$this->r = $r;
+		}
+
+		public function get_Area(){
+			return 3.14 * $this->r * $this->r;
+		}
+	}
+
+
+	function calculate_Area(Shape $shape){
+		return $shape->get_Area();
+	}
+
+	echo "Area of Circle :  ";
+	echo calculate_Area(new Circle(7));
+	echo "<br>";
+	echo "Area of Squre :  ";
+	echo calculate_Area(new Squre(5));
+
+?>
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+		OOP CONCEPTS WITH PHP - ENCAPSULATION
+
+
+<?php class ICT {
+private $studentId;
+private $pwd;
+public function updatePwd($studentId, $pwd) {
+echo("Function to Update Password is '". $pwd . "' for User " . $studentId);
+echo "<br>";
+}
+public function courseCode($studentId) {
+echo("Function to Check Course Code of Student is ". $studentId);
+echo "<br>"; }
+}
+$obj = new ICT();
+$obj -> updatePwd("ICT011", "ict123");
+$obj -> courseCode("SWT22022");
+?>
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+		VALIDATION
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Validation</title>
+	<style type="text/css">
+		.mydiv
+		{
+			border-style: solid;
+		}
+	</style>
+
+
+	<script type="text/javascript">
+		
+		function validate()
+		{
+			var username=document.getElementById("uname");
+			var password=document.getElementById("pass");
+			var email=document.getElementById("mail").value;
+
+			atpos=email.indexOf("@");
+			dotpos=email.lastIndexOf(".");
+
+			if (username.value.trim()=="")
+			{
+				uname.style.border="solid 3px red";
+				document.getElementById("lbuser").style.visibility="visible";
+				return false;
+			}
+			else if (password.value.trim().length<8 || password.value.trim()=="")
+			{
+				pass.style.border="solid 3px red";
+				document.getElementById("lbpass").style.visibility="visible";
+				return false;
+
+
+			}
+			else if(atpos<1 || (dotpos-atpos<2))
+			{
+				pass.style.border="solid 3px red";
+				document.getElementById("lbmail").style.visibility="visible";
+				return false;
+				
+			}
+			else
+			{
+				return true;
+			}
+
+			
+		}
+	</script>
+</head>
+<body>
+	<form onsubmit="return validate()" action="welcome.html">
+		<div class="mydiv">
+			<h1>Login Form</h1>
+			<input id="uname" placeholder="Enter User Name" type="text" >
+			<label id="lbuser" style="color: red;visibility: hidden;">Invalid</label>
+			<br>
+			<br>
+
+			<input type="password" id="pass" placeholder="Enter Password" required>
+			<label id="lbpass" style="color: red;visibility: hidden;">Too Short</label>
+			<br>
+			<br>
+
+			<input type="text" id="mail" placeholder="Enter Email" required>
+			<label id="lbmail" style="color: red;visibility: hidden;">Invalid Email</label>
+			<br>
+			<br>
+
+			<input type="submit" value="submit">
+		</div>
+	</form>
+
+</body>
+</html>
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+		WELCOME PAGE
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome Page</title>
+</head>
+<body>
+	<H1> Welcome To My Page</H1>
+	<br>
+	<h3>Name : Dasuni Dilhara</h3>
+	<h3>Registration Number : SEU_IS_16_ICT_011</h3>
+	<h3>Department : ICT</h3>
+	<h3>Faculty : Faculty of Technology</h3>
+</body>
+</html>
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+		TODAY'S DATE with WEEK DAY OR WEEKEND and NAMES OF THE WEEK
+ 
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
+
+<% int day=5;  %>
+<%! String days[]={"MONDAY","TUESDAY","WEDNESDAY","THURSDAY","FRIDAY"}; %>
+<% int fontsize;%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+       
+        <title>JSP Page</title>
+    </head>
+    <% Date date=new Date();%>
+    <body>
+        <h1>TODAY'S DATE</h1>
+        <p> Today's Date is : <%=date%></p>
+        
+        <% 
+if (day==6 || day==7)
+{
+out.println("WeekEnd");
+}
+else
+{
+out.println("WeekDay");
+}
+%>
+<br>
+<br>
+
+<% for(fontsize=1; fontsize<=5; fontsize++) 
+{%>
+<font color="green" size="<%=fontsize%>">
+<%out.print(days[fontsize-1]); %>
+</font> </br>
+<%
+}
+%>
+
+    </body>
+</html>
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+		GitHub CODES
+
+
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git init
+Initialized empty Git repository in C:/Users/sudu baba/Desktop/GitHub/.git/
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git config --global user.name "Dasuni"
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git config --global user.email "dasudil4@gmail.com"
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ touch form.html
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ touch form.js
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ touch form.php
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git add .
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git commit -m "My GitHub Exersise"
+[master (root-commit) 39645b0] My GitHub Exersise
+ 3 files changed, 315 insertions(+)
+ create mode 100644 form.html
+ create mode 100644 form.js
+ create mode 100644 form.php
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git branch
+* master
+  test
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git switch test
+Switched to branch 'test'
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git checkout master
+Switched to branch 'master'
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git branch new
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git branch
+* master
+  new
+  test
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (master)
+$ git switch test
+Switched to branch 'test'
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git remote -v
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git remote add origin https://github.com/Dasuni0129/exam.git
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git add remote add origin https://github.com/Dasuni0129/exam.git
+fatal: pathspec 'remote' did not match any files
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git remote add origin https://github.com/Dasuni0129/exam.git
+fatal: remote origin already exists.
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git add remote add origin https://github.com/Dasuni0129/exam.git
+fatal: pathspec 'remote' did not match any files
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git remote -v
+origin  https://github.com/Dasuni0129/exam.git (fetch)
+origin  https://github.com/Dasuni0129/exam.git (push)
+
+sudu baba@DESKTOP-GV51V4T MINGW64 ~/Desktop/GitHub (test)
+$ git push -f origin master
+Enumerating objects: 3, done.
+Counting objects: 100% (3/3), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 1.26 KiB | 1.26 MiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/Dasuni0129/exam.git
+ + 4c7056e...39645b0 master -> master (forced update)
+
+****_________________________________________________________________________________________________________________________________________________****
+
+01) git init
+02) git config --global user.name "Dasuni"
+03) git config --global user.email "dasudil4@gmail.com"
+04) touch index.html //create file html
+05) git add . //add all file 
+06) git add index.html //add one file
+07) git status
+08) after that turn to html create html file "SEUSL"
+09) git add .
+10) git commit
+	thet press "shift+i" type massage then press "Esc" then press "shift+:" then type "wq" enter
+11) git add .
+12) git status
+13)  git commit -m 'Internet Application - Practical Examination'
+14) git init
+ create to branch
+15) git branch
+16) git branch test //create branch 
+17) git branch //test branch
+18) git switch test //change branch to test
+19) git checkout master//change test branch to master branch
+20) git branch //see you create branch
+	then go to git hub create file and copy you file "URL"
+21) git add origin
+22) git remote add origin https://github.com/kasun245/test.git
+23) git remote -v //see you fill
+24) git push -f origin master //upload file git hub
+
+****_________________________________________________________________________________________________________________________________________________****
+****_________________________________________________________________________________________________________________________________________________****
+****_________________________________________________________________________________________________________________________________________________****		
+
+		VALIDATION - 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Name and Password Validation </title>
+
+	<script type="text/javascript">
+		
+		function formValidation(){
+
+			if (document.myForm.username.value == "") {
+				alert("Please provide your username");
+				document.myForm.username.focus();
+				return false;
+			}
+
+			if (document.myForm.pwd.value == "") {
+				alert("Please enter your password");
+				document.myForm.pwd.focus();
+				return false;
+			}
+
+			if (document.myForm.cnfpwd.value == "") {
+				alert("Please enter your confirm password");
+				document.myForm.cnfpwd.focus();
+				return false;
+			}
+
+			var password = document.myForm.pwd.value;
+			var confirmpassword = document.myForm.cnfpwd.value;
+
+			if (password != confirmpassword) {
+				alert("Recheck Password");
+				return false;
+			}
+
+
+			return true;
+
+		}
+
+	</script>
+
+
+</head>
+
+<body>
+
+<form name="myForm"  action="test.html" onsubmit="return formValidation()" value="welcome.html">
+
+	<table>
+		
+		<tr>
+			<td>Enter User Name :</td>
+			<td><input type="text" name="username"></td>
+		</tr>
+
+		<tr>
+			<td>Enter Password :</td>
+			<td><input type="password" name="pwd"></td>
+		</tr>
+
+		<tr>
+			<td>Enter Password for Confirmation :</td>
+			<td><input type="password" name="cnfpwd"></td>
+		</tr>
+
+		<tr>
+			<td><input type="submit" value="LOGIN"></td>
+		</tr>
+
+	</table>
+	
+</form>
+
+</body>
+
+</html>
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+		VALIDATION - 
+
+<!DOCTYPE html>
+<html>
+<head>
+      <title></title>
+      <script type="text/javascript">
+      function validate(){
+            var uname = document.frm.username.value;
+            var email = document.frm.email.value;
+            var pass = document.frm.pwd.value;
+            var repass = document.frm.repwd.value;
+            if (uname == "") {
+                  window.alert("Please Enter Username."); 
+                  uname.focus(); 
+                  return false;
+            }
+            if (email == "") {
+                  window.alert("Please Enter Your E-mail."); 
+                  email.focus();  
+                  return false;
+            }
+            if (!/^[a-zA-Z0-9]+@[a-zA-Z]+(?:\.[a-zA-Z]+)*$/.test(email)) {
+                  window.alert("Enter valid email"); 
+                  email.focus(); 
+                  return false;
+            
+                  
+            }
+            if (pass == "") {
+                  window.alert("Please Enter Your Password."); 
+                  pass.focus(); 
+                  return false;
+            }
+            var x = pass;
+            if(x.match(/[a-z]/g) && x.match(/[A-Z]/g) && x.match(/[0-9]/g) && x.match(/[^a-zA-Z0-9\d]/g) && x.length >= 8){
+                  
+                  //return true;
+            }else{
+                  window.alert("Password Only Contains Simple Letters, Capital Letters, Digits and Specil Characteristics and Password Must be Contains 8 Digits"); 
+                  pass.focus(); 
+                  return false;
+            }
+            if (repass == "") {
+                  window.alert("Please Retype Password");
+                  repass.focus();
+                  return false;
+            }else if (pass != repass) {
+                  window.alert("Password Does Not Match");
+                  repass.focus();
+                  return false;
+            }
+
+            return true;
+      }
+</script>
+</head>
+
+<body>
+<form name="frm" action="" onsubmit="return validate()" method="post">
+      Username: <input type="text" name="username"><br> <br>
+      E-mail:   <input type="text" name="email"> <br> <br>
+      Password: <input type="password" name="pwd"><br> <br>
+      Retype Password: <input type="password" name="repwd"><br> <br>
+
+      <input type="submit" name="btn" value="submit">
+
+</form>
+
+</body>
+</html>
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+		TODAY'S DATE with WEEK DAY OR WEEKEND 
+
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.Date"%>
+
+<%! int day = 5;%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Today's date</title>
+    </head>
+
+    <% Date date = new Date();%>
+
+    <body>
+
+        <h1>Today's date</h1>
+        <p>Today's date is: <%= date%></p>
+        
+        <% if(day == 6 || day == 7)
+	{
+            out.print("Weekend");
+        }
+	else{
+            out.print("WeekDay");
+        }
+        %>
+    </body>
+</html>
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+		
+
+		PHP FORM VALIDATION
+
+
+<!DOCTYPE HTML>   
+<html> 
+<head> 
+	<style>
+	 .error {color: #FF0000;}
+	  </style>
+ </head>
+  <body>   
+ 
+<?php
+ // define variables and set to empty values
+ $nameErr = $emailErr = $genderErr = "";
+ $name = $email = $gender = $comment = ""; 
+ 
+if ($_SERVER["REQUEST_METHOD"] == "POST") 
+{  
+ if (empty($_POST["name"])) 
+  {     
+  	$nameErr = "Name is Required";
+  }
+   else
+  {    
+    $name = test_input($_POST["name"]);     // check if name only contains letters and whitespace     
+
+    if (!preg_match("/^[a-zA-Z ]*$/",$name))
+     {       
+     	$nameErr = "Only Letters and White Space Allowed";     
+     }   
+ }      
+     if (empty($_POST["email"]))
+      {     
+      	$emailErr = "Email is Required"; 
+      } else {     
+          $email = test_input($_POST["email"]);     // check if e-mail address is well-formed     
+              if (!filter_var($email, FILTER_VALIDATE_EMAIL)) 
+                 {       $emailErr = "Invalid Email Format";     }   }          
+                     if (empty($_POST["comment"])) 
+                        {     $comment = "";   
+                        } else 
+
+                        {     
+
+                         $comment = test_input($_POST["comment"]); 
+                        } 
+ 
+                   if (empty($_POST["gender"])) 
+                   {     $genderErr = "Gender is required";
+
+                   } else {    
+                     $gender = test_input($_POST["gender"]);   
+                 } 
+             } 
+ 
+                   function test_input($data) 
+                   {   
+                   	$data = trim($data);
+
+                    $data = stripslashes($data);   
+                    $data = htmlspecialchars($data);   
+                    return $data;
+                   } 
+
+
+                   ?> 
+ 
+<h2>PHP Form Validation</h2> 
+<p><span class="error">* Required Field</span></p> 
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">     
+	Name: <input type="text" name="name" value="<?php echo $name;?>">   <span class="error">* <?php echo $nameErr;?></span>  <br><br>   
+
+	E-mail: <input type="text" name="email" value="<?php echo $email;?>">   <span class="error">* <?php echo $emailErr;?>
+		
+	</span>   <br><br>   
+    
+	Comment: 
+	<textarea name="comment" rows="5" cols="40">
+	<?php 
+	echo $comment;
+	?>
+	</textarea>  
+    <br><br>   
+
+    Gender:   <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female   
+	      <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male   
+	<span class="error">* <?php echo $genderErr;?></span>   
+    <br><br>   
+
+    <input type="submit" name="submit" value="Submit">   
+</form> 
+ 
+   <?php 
+
+   echo "<h2>***Your Details***</h2>"; 
+   echo "Your Name : " ,$name; 
+   echo "<br>"; 
+   echo "Your Email : ", $email; 
+   echo "<br>"; 
+   echo "Comment : ",$comment; 
+   echo "<br>"; 
+   echo "Your Gender : ", $gender; ?> 
+ 
+</body> 
+
+</html>
+ 
+
+
+****_________________________________________________________________________________________________________________________________________________****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
